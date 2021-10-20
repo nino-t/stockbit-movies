@@ -40,6 +40,8 @@ Type following command :
 > yarn start (For running app with development mode)
 >
 > open http://localhost:3000 in your browser
+>
+> yarn test (For running unit test)
 
 ### License
 MIT
