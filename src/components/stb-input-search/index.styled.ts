@@ -5,6 +5,14 @@ export const InputSearch = styled.div`
   border-radius: 6px;
   
   display: flex;
+
+  .InputSearch__autocomplete {
+    a {
+      &:hover {
+        color: #BE123C;
+      }
+    }
+  }
 `;
 
 export const Input = styled.input`

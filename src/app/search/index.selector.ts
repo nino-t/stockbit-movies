@@ -12,3 +12,6 @@ export const {
 export const selectAllSearchMoviesPage = (state: RootState) => state.search.page
 export const selectAllSearchMoviesStatus = (state: RootState) => state.search.status
 export const selectTotalSearchMoviesInData = (state: RootState) => state.search.total
+
+export const selectGlobalSearchStatus = (state: RootState) => state.search.globalSearchAutocomplete.status
+export const selectGlobalSearchMovies = (state: RootState) => state.search.globalSearchAutocomplete.movies

@@ -8,3 +8,11 @@ export const fetchSearchMoviesAction = createAsyncThunk(
     return response
   }
 )
+
+export const fetchGlobalSearchMoviesAction = createAsyncThunk(
+  `search/fetchGlobalSearchMovies`,
+  async (args: movieApi.FetchMoviesArgs) => {
+    const response = await movieApi.fetchMovies(args);
+    return response
+  }
+)

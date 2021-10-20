@@ -27,6 +27,16 @@ const moviesSlice = createSlice({
     .addCase(action.fetchSearchMoviesAction.rejected, (state, action) => {
       state.status = 'failed'
     })
+    .addCase(action.fetchGlobalSearchMoviesAction.pending, (state, action) => {
+      state.globalSearchAutocomplete.status = 'loading'
+    })
+    .addCase(action.fetchGlobalSearchMoviesAction.fulfilled, (state, action) => {
+      state.globalSearchAutocomplete.status = 'idle'
+      state.globalSearchAutocomplete.movies = action.payload?.movies ?? []
+    })
+    .addCase(action.fetchGlobalSearchMoviesAction.rejected, (state, action) => {
+      state.globalSearchAutocomplete.status = 'failed'
+    })
   },
 })
 
