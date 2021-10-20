@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Lightbox } from 'react-modal-image';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchMoviesAction } from '../../app/movies/index.action';
+import { selectAllMovies } from '../../app/movies/index.selector';
 import batmanHero from '../../assets/images/batman-hero.jpeg';
 import StbHeroWatch from '../../components/stb-hero-watch/index.component';
 import StbHero from '../../components/stb-hero/index.component';
@@ -13,8 +16,14 @@ export interface PreviewImageObject {
 }
 
 const BerandaPage: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const movies = useAppSelector(selectAllMovies);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<PreviewImageObject | null>(null);
+
+  useEffect(() => {
+    dispatch(fetchMoviesAction());
+  }, [dispatch]);
 
   return (
     <AppLayout>
@@ -46,18 +55,19 @@ const BerandaPage: React.FC = () => {
         <StbPlaylistVideos
           title={'Batman Movies'}>
           {
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_number, index) => (
+            movies.map((movie, index) => (
               <StbVideolistItem
-                id={'xxx'}
-                poster={'https://m.media-amazon.com/images/M/MV5BYjdkZWFhNzctYmNhNy00NGM5LTg0Y2YtZWM4NmU2MWQ3ODVkXkEyXkFqcGdeQXVyNTA0OTU0OTQ@._V1_SX300.jpg'}
-                title={'Stranger Things'}
-                type={'Movie'}
-                year={'2019'}
+                key={index}
+                id={movie.imdbID}
+                poster={movie.Poster}
+                title={movie.Title}
+                type={movie.Type}
+                year={movie.Year}
                 handlePosterClicked={() => {
                   setOpenModal(true);
                   setPreviewImage({
-                    title: 'Stranger Things',
-                    image: 'https://m.media-amazon.com/images/M/MV5BYjdkZWFhNzctYmNhNy00NGM5LTg0Y2YtZWM4NmU2MWQ3ODVkXkEyXkFqcGdeQXVyNTA0OTU0OTQ@._V1_SX300.jpg'
+                    title: movie.Title,
+                    image: movie.Poster
                   });
                 }}
               />

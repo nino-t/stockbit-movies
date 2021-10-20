@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import BerandaPage from './pages/beranda/index.page';
 import SearchPage from './pages/search/index.page';
-import VvideoPage from './pages/v-video/index.page';
+import VMoviePage from './pages/v-movie/index.page';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route exact path='/' component={() => <Redirect to="/browse" />} />
         <Route path='/browse' component={BerandaPage} />
         <Route path='/search' component={SearchPage} />
-        <Route path='/v/:videoId' component={VvideoPage} />
+        <Route path='/v/:movieId' component={VMoviePage} />
       </Switch>
     </BrowserRouter>
   );
