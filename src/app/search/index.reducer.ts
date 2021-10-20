@@ -15,7 +15,18 @@ const moviesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(action.fetchSearchMoviesAction.fulfilled, searchAdapter.upsertMany)
+    .addCase(action.fetchSearchMoviesAction.pending, (state, action) => {
+      state.status = 'loading'
+    })
+    .addCase(action.fetchSearchMoviesAction.fulfilled, (state, action) => {
+      state.status = 'idle'
+      state.page = action.meta.arg.page
+      state.total = action.payload?.total ?? 0
+      searchAdapter.upsertMany(state, action.payload?.movies ?? [])
+    })
+    .addCase(action.fetchSearchMoviesAction.rejected, (state, action) => {
+      state.status = 'failed'
+    })
   },
 })
 

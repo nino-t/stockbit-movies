@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Spinner from 'react-spinkit';
 import { Lightbox } from 'react-modal-image';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchMoviesAction } from '../../app/movies/index.action';
-import { selectAllMovies } from '../../app/movies/index.selector';
+import { selectAllMovies, selectAllMoviesPage, selectAllMoviesStatus, selectTotalMovies, selectTotalMoviesInData } from '../../app/movies/index.selector';
 import batmanHero from '../../assets/images/batman-hero.jpeg';
 import StbHeroWatch from '../../components/stb-hero-watch/index.component';
 import StbHero from '../../components/stb-hero/index.component';
@@ -18,12 +19,29 @@ export interface PreviewImageObject {
 const BerandaPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const movies = useAppSelector(selectAllMovies);
+  const page = useAppSelector(selectAllMoviesPage);
+  const status = useAppSelector(selectAllMoviesStatus);
+  const totalMovies = useAppSelector(selectTotalMovies);
+  const totalMoviesInData = useAppSelector(selectTotalMoviesInData);
+  const [currentPage, setCurrentPage] = useState<number>(page);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<PreviewImageObject | null>(null);
 
   useEffect(() => {
-    dispatch(fetchMoviesAction());
-  }, [dispatch]);
+    dispatch(fetchMoviesAction({ q: null, page: currentPage }));
+  }, [dispatch, currentPage]);
+
+  useEffect(() => {
+    const isScrolling = (): void => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      if ((scrollTop + clientHeight >= scrollHeight) && totalMovies < totalMoviesInData) {
+        setCurrentPage(currentPage + 1);
+      }      
+    }  
+
+    window.addEventListener('scroll', isScrolling);
+    return () => window.removeEventListener('scroll', isScrolling);
+  }, [currentPage, totalMovies, totalMoviesInData]);
 
   return (
     <AppLayout>
@@ -74,6 +92,12 @@ const BerandaPage: React.FC = () => {
             ))
           }
         </StbPlaylistVideos>
+        {
+          status === 'loading' &&
+            <div className="flex justify-center items-center mt-10">
+              <Spinner name="line-scale" fadeIn="none" />
+            </div>
+        }
       </div>
     </AppLayout>
   );

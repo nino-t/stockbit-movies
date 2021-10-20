@@ -9,4 +9,6 @@ export const {
   selectTotal: selectTotalSearchMovies,
 } = searchAdapter.getSelectors((state: RootState) => state.search)
 
+export const selectAllSearchMoviesPage = (state: RootState) => state.search.page
 export const selectAllSearchMoviesStatus = (state: RootState) => state.search.status
+export const selectTotalSearchMoviesInData = (state: RootState) => state.search.total

@@ -1,5 +1,7 @@
 import { SearchState } from './index.interface';
 
 export const initialState: SearchState = {
-  status: 'idle'
+  status: 'idle',
+  page: 1,
+  total: 0
 }

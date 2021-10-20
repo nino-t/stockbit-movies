@@ -6,6 +6,10 @@ export const Nav = styled.ul`
 `;
 
 export const Item = styled.li`
+  &:not(:last-child) {
+    margin-right: 24px;
+  }
+
   a {
     font-family: 'DM Sans', sans-serif;
     font-style: normal;

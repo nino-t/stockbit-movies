@@ -1,6 +1,7 @@
 import React from 'react';
 import * as s from './index.styled';
 import * as i from './index.interface';
+import nullImage from '../../assets/images/null-image.png';
 
 const StbMovieOverview: React.FC<i.MovieOverview> = (props) => {
   return (
@@ -9,6 +10,7 @@ const StbMovieOverview: React.FC<i.MovieOverview> = (props) => {
         <s.Poster
           src={props.poster}
           alt={props.title}
+          onError={(e: any)=> {e.target.onerror = null; e.target.src = nullImage }}
         />
       </div>
       <div className="py-2 px-8 bg-white w-10/12" style={{ border: '1px solid #BE123C' }}>

@@ -5,13 +5,19 @@ const _isNull = (arg: any): boolean => {
   return arg === null;
 } 
 
-export const fetchMovies = async (q: string | null = null) => {
+export interface FetchMoviesArgs {
+  page: number
+  q: string | null
+}
+
+export const fetchMovies = async (args: FetchMoviesArgs) => {
+  const { page, q } = args
   try {
     const response: any = await request.get('/', {
       params: {
         s: _isNull(q) ? 'Batman' : q,
         type: 'movie',
-        page: 1
+        page: page
       }
     });
 

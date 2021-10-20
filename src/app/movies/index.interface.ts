@@ -45,5 +45,7 @@ interface FullmovieById {
 
 export interface MoviesState {
   status: 'idle' | 'loading' | 'failed'
+  page: number
+  total: number
   fullmovieById: FullmovieById
 }

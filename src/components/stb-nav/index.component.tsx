@@ -5,7 +5,7 @@ import * as i from './index.interface';
 
 const StbNav: React.FC<i.Nav> = (props) => {
   return (
-    <s.Nav>
+    <s.Nav className="flex">
       {
         props.menus.map((menu, index) => (
           <s.Item key={index}>

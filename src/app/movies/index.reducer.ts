@@ -14,7 +14,18 @@ const moviesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(action.fetchMoviesAction.fulfilled, moviesAdapter.upsertMany)
+      .addCase(action.fetchMoviesAction.pending, (state, action) => {
+        state.status = 'loading'
+      })
+      .addCase(action.fetchMoviesAction.fulfilled, (state, action) => {
+        state.status = 'idle'
+        state.page = action.meta.arg.page
+        state.total = action.payload?.total ?? 0
+        moviesAdapter.upsertMany(state, action.payload?.movies ?? [])
+      })
+      .addCase(action.fetchMoviesAction.rejected, (state, action) => {
+        state.status = 'failed'
+      })
       .addCase(action.fetchMovieByIdAction.pending, (state, action) => {
         state.fullmovieById.status = 'loading'
         state.fullmovieById.fullmovie = null

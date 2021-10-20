@@ -3,9 +3,9 @@ import * as api from './index.api';
 
 export const fetchMoviesAction = createAsyncThunk(
   `movies/fetchMovies`,
-  async () => {
-    const response = await api.fetchMovies();
-    return response?.movies ?? []
+  async (args: api.FetchMoviesArgs) => {
+    const response = await api.fetchMovies(args);
+    return response
   }
 )
 

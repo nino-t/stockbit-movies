@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import Spinner from 'react-spinkit';
 import { Lightbox } from 'react-modal-image';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchSearchMoviesAction } from '../../app/search/index.action';
-import { selectAllSearchMovies } from '../../app/search/index.selector';
+import { selectAllSearchMovies, selectAllSearchMoviesPage, selectAllSearchMoviesStatus, selectTotalSearchMovies, selectTotalSearchMoviesInData } from '../../app/search/index.selector';
 import StbPlaylistVideos from '../../components/stb-playlist-videos/index.component';
 import StbVideolistItem from '../../components/stb-videolist-item/index.compoent';
 import AppLayout from '../../features/app-layout/index.feature';
@@ -17,13 +18,30 @@ const SearchPage: React.FC = (props) => {
   const query = useQuery();
   const dispatch = useAppDispatch();
   const keyword = query.get('q') || '';
+  const status = useAppSelector(selectAllSearchMoviesStatus);
+  const page = useAppSelector(selectAllSearchMoviesPage);
+  const totalMovies = useAppSelector(selectTotalSearchMovies);
+  const totalMoviesInData = useAppSelector(selectTotalSearchMoviesInData);
+  const [currentPage, setCurrentPage] = useState<number>(page);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<PreviewImageObject | null>(null);
   const movies = useAppSelector(selectAllSearchMovies);
 
   useEffect(() => {
-    dispatch(fetchSearchMoviesAction(keyword));
-  }, [dispatch, keyword]);
+    dispatch(fetchSearchMoviesAction({ q: keyword, page: currentPage }));
+  }, [dispatch, currentPage, keyword]);
+
+  useEffect(() => {
+    const isScrolling = (): void => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      if ((scrollTop + clientHeight >= scrollHeight) && totalMovies < totalMoviesInData) {
+        setCurrentPage(currentPage + 1);
+      }      
+    }  
+
+    window.addEventListener('scroll', isScrolling);
+    return () => window.removeEventListener('scroll', isScrolling); 
+  }, [currentPage, totalMovies, totalMoviesInData]);
 
   return (
     <AppLayout isHeaderTransparent={false}>
@@ -59,6 +77,12 @@ const SearchPage: React.FC = (props) => {
             ))
           }
         </StbPlaylistVideos>
+        {
+          status === 'loading' &&
+            <div className="flex justify-center items-center mt-10">
+              <Spinner name="line-scale" fadeIn="none" />
+            </div>
+        }
       </div>
     </AppLayout>
   );
