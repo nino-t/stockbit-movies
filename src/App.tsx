@@ -8,7 +8,7 @@ import {
 import { ModalImageProvider } from './contexts/modal-image-context/index.context';
 import BerandaPage from './pages/browse/index.page';
 import SearchPage from './pages/search/index.page';
-import VMoviePage from './pages/v-movie/index.page';
+import WatchPage from './pages/watch/index.page';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route exact path='/' component={() => <Redirect to="/browse" />} />
           <Route path='/browse' component={BerandaPage} />
           <Route path='/search' component={SearchPage} />
-          <Route path='/v/:movieId' component={VMoviePage} />
+          <Route path='/watch' component={WatchPage} />
         </Switch>
       </BrowserRouter>
     </ModalImageProvider>

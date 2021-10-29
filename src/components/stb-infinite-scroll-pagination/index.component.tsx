@@ -29,11 +29,16 @@ const StbInfiniteScrollPagination: React.FC<i.StbInfiniteScrollPaginationProps> 
   );
 }
 
-const Loading: React.FC<{ isLoading: boolean }> = (isLoading) => {
+const Loading: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
   return (
-    <s.Loader>
-      <Spinner name="line-scale" fadeIn="none" />
-    </s.Loader>
+    <React.Fragment>
+      {
+        isLoading &&
+          <s.Loader>
+            <Spinner name="line-scale" fadeIn="none" />
+          </s.Loader>
+      }
+    </React.Fragment>
   );
 }
 const MemoLoading = React.memo(Loading);
