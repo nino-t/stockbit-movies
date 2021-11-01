@@ -28,10 +28,22 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
   },
   "browserslist": {
     "production": [
@@ -47,11 +59,19 @@
   },
   "devDependencies": {
     "@craco/craco": "^6.3.0",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/node-logger": "^6.3.12",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.3.12",
     "@types/react-router-dom": "^5.3.1",
     "@types/react-spinkit": "^3.0.7",
     "@types/styled-components": "^5.1.15",
     "autoprefixer": "^9",
     "postcss": "^7",
+    "postcss-preset-env": "^6.7.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }

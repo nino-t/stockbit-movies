@@ -1,0 +1,23 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import StbLoading from './stb-loading.component';
+
+<Meta
+  title="Components/stb-loading"
+  component={StbLoading} 
+/>
+
+# stb-loading
+StbLoading is the primary component. Can be used if you want fetch data with loading progress.  
+It's will showing when value of isLoading props is `true`, and set `false` to dismiss.
+
+export const Template = (args) => <StbLoading {...args} />
+
+<Canvas>
+  <Story 
+    name="Default"
+    args={{ 
+      isLoading: true
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

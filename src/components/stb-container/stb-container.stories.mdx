@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import StbContainer from './stb-container.component';
+
+<Meta
+  title="Components/stb-container"
+  component={StbContainer} 
+/>
+
+# stb-container
+StbContainer is the primary component. Can be used to wrap content and add some margin. automatically added CSS class `container mx-auto` from tailwindcss.
+
+export const Template = (args) => <StbContainer {...args} />
+
+<Canvas>
+  <Story 
+    name="Default"
+    args={{
+      children: [
+        <div className="p-4 bg-red-300">
+          <p>
+            Hello World
+          </p>
+        </div>
+      ]
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

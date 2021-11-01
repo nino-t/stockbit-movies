@@ -1,7 +1,14 @@
 import React from 'react';
 import Spinner from 'react-spinkit';
 
-const StbLoading: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
+interface StbLoadingProps {
+  /**
+   * Current loading status
+   */
+  isLoading: boolean
+}
+
+const StbLoading: React.FC<StbLoadingProps> = ({ isLoading }) => {
   return (
     <React.Fragment>
       {

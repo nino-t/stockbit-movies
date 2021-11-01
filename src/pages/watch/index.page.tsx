@@ -3,8 +3,8 @@ import { useLocation } from 'react-router-dom';
 import AppLayout from '../../features/app-layout/index.feature';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchMovieByIdAction } from '../../app/movies/index.action';
-import StbLoading from '../../components/stb-loading/index.component';
-import StbContainer from '../../components/stb-container/index.component';
+import StbLoading from '../../components/stb-loading/stb-loading.component';
+import StbContainer from '../../components/stb-container/stb-container.component';
 import { selectFullmovieByIdMovie, selectFullmovieByIdStatus } from '../../app/movies/index.selector';
 import StbMovieOverview from '../../components/stb-movie-overview/index.component';
 

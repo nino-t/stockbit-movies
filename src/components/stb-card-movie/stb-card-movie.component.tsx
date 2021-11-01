@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as s from './index.styled';
-import * as i from './index.interface';
+import * as s from './stb-card-movie.styled';
+import * as i from './stb-card-movie.interface';
 import nullImage from '../../assets/images/null-image.png';
 
 const StbCardMovie: React.FC<i.StbCardMovieProps> = ({ poster, title, release, href, handlePosterClicked }) => {

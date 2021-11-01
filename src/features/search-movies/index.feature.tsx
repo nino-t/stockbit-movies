@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchMoviesAction } from '../../app/movies/index.action';
 import { selectAllMovies, selectAllMoviesPage, selectAllMoviesStatus, selectTotalMovies, selectTotalMoviesInData } from '../../app/movies/index.selector';
-import StbCardMovie from '../../components/stb-card-movie/index.component';
+import StbCardMovie from '../../components/stb-card-movie/stb-card-movie.component';
 import StbHeadingH3 from '../../components/stb-heading-h3/index.component';
 import StbInfiniteScrollPagination from '../../components/stb-infinite-scroll-pagination/index.component';
 import { ModalImageContext } from '../../contexts/modal-image-context/index.context';
